@@ -50,7 +50,7 @@ class DanmakuClient:
         context.set_ciphers("ECDHE-ECDSA-CHACHA20-POLY1305:AES256-GCM-SHA384")
         context.set_ecdh_curve("secp256k1")
 
-        self.__ws = await self.__hs.ws_connect(ws_url)
+        self.__ws = await self.__hs.ws_connect(ws_url, ssl=context)
         for reg_data in reg_datas:
             if type(reg_data) == str:
                 await self.__ws.send_str(reg_data)
