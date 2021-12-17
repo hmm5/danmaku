@@ -43,10 +43,10 @@ class DanmakuClient:
 
     async def init_ws(self):
         ws_url, reg_datas = await self.__site.get_ws_info(self.__url)
-
-        context = ssl.SSLContext()
+        
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        context.check_hostname = False
         context.verify_mode = ssl.CERT_NONE
-        context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1
         context.set_ciphers("ECDHE-ECDSA-CHACHA20-POLY1305:AES256-GCM-SHA384")
         context.set_ecdh_curve("secp256k1")
 
