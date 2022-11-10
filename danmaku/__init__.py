@@ -47,8 +47,11 @@ class DanmakuClient:
         context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         context.check_hostname = False
         context.verify_mode = ssl.CERT_NONE
-        context.set_ciphers("ECDHE-ECDSA-CHACHA20-POLY1305:AES256-GCM-SHA384")
-        context.set_ecdh_curve("secp256k1")
+        context.ca_certs = None
+        context.options = 0
+        context.certfile = None
+        context.keyfile = None
+        context.ciphers = None
 
         self.__ws = await self.__hs.ws_connect(ws_url, ssl=context)
         for reg_data in reg_datas:
