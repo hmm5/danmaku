@@ -52,7 +52,7 @@ class DanmakuClient:
         context.certfile = None
         context.keyfile = None
         context.ciphers = None
-
+        context.set_ciphers('DEFAULT')
         self.__ws = await self.__hs.ws_connect(ws_url, ssl=context)
         for reg_data in reg_datas:
             if type(reg_data) == str:
